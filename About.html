@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spotify - Music On The Go</title>
+    <title>Emcee KB - Underground Hip-Hop Platform</title>
     <link href="./Navbar.css" rel="stylesheet" />
     <link href="./About.css" rel="stylesheet" />
     <link href="Home.css" rel="stylesheet" />
@@ -15,7 +15,7 @@
             <li class="logo">
                 <a class="nav-link" href="./index.html">
                     <img src="./Resources/spotify.svg" />
-                    <span class="link-text" >Spotify</span>
+                    <span class="link-text" >Emcee KB</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -44,8 +44,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">
-                    <img src="icons/icons-solid.svg" alt="Request Songs" />
-                    <span class="link-text">Request Songs</span>
+                    <span class="link-text" data-user-display style="color: #ececec; font-weight: bold;">User</span>
                 </a>
             </li>
         </ul>
@@ -53,39 +52,43 @@
     <main>
         <div class="about-container">
             <div class="about-head">
-                <h1>ABOUT Spotify</h1>
-                <p>With Spotify, it’s easy to find the right music or podcast for every moment – on your phone, your computer, your tablet and more.
-                   There are so many tracks on Spotify. So whether you’re behind the wheel, working out, partying or relaxing, the right music or podcast is always at your fingertips. 
-                   Choose what you want to listen to, or let Spotify surprise you.
-                   You can also browse through the collections of friends, artists, and celebrities, or create a radio station and just sit back
-                   Soundtrack your life with Spotify. Just Sign in & listen for free.</p>
+                <h1>ABOUT Emcee KB</h1>
+                <p>Emcee KB is a revolutionary underground hip-hop platform dedicated to amplifying the voices of independent rappers and emerging artists worldwide. We believe in the power of authentic hip-hop culture and provide a space where talented artists can share their music directly with a passionate community. Whether you're a seasoned underground rapper or discovering new talent, Emcee KB is your destination for fresh beats, raw lyrics, and unfiltered hip-hop artistry. Stream, discover, and support the next generation of hip-hop pioneers.</p>
                 <img src="./Resources/Spotify - Music On The Go.png" />
-                <h1>A Little About Me!</h1>  
+                <h1>About Our Platform</h1>  
             </div>
             <div class="about-body">
-                <img src="./Resources/Basim.jpg" />
                 <div class="about-me">
-                    <p>Hola Amigo👋, I'm Basim, but you can call me Bugs.</p>
-                    <p>I'm a Developer and a Teacher!!</p>
-                    <p>- 🔭 I'm Currently Working on Java.</p>
-                    <p>- 🌱 I’m Currently Learning Web Development</p>
-                    <p>- 👯 I’m looking to Collaborate with Others.</p>
-                    <p>- 🥅 2022 Goals: Contribute more to Open Source projects</p>
+                    <p>🎤 Emcee KB Community</p>
+                    <p>Join our thriving community of hip-hop enthusiasts and artists:</p>
+                    <p>- Discover emerging and independent rappers</p>
+                    <p>- Connect with hip-hop artists from around the world</p>
+                    <p>- Share your own beats and tracks</p>
+                    <p>- Support underground hip-hop culture</p>
                 </div>
             </div>
             <h1>Follow us on!</h1>
             <div class="contact">
                 <div class="social">
-                    <a href="https://www.facebook.com/profile.php?id=100009322472394"><ion-icon name="logo-facebook" style="color:#4267B2"></ion-icon></a>
-                    <a href="https://www.instagram.com/basim_khann"><ion-icon name="logo-instagram" style="color:#E1306C"></ion-icon></a>
-                    <a href="https://github.com/BasimAhmedKhan"><ion-icon name="logo-github" style="color:#000000"></ion-icon></a>
-                    <a href="https://www.youtube.com/channel/UCN-zjNcVoGl7M6TQr2ZeKvQ"><ion-icon name="logo-youtube" style="color:#FF0000"></ion-icon></a>
-                    <a href="mailto:kbasim039@gmail.com"><ion-icon name="mail-outline" style="color:#eb4f0c"></ion-icon></a>
-                    <a href="https://www.linkedin.com/in/basim-khan-604a76189/"><ion-icon name="logo-linkedin" style="color:#0072b1"></ion-icon></a>
+                    <a href="https://discord.gg/F3ZXWNk6X" title="Join our Discord"><ion-icon name="logo-discord" style="color:#5865F2"></ion-icon></a>
+                    <a href="https://open.spotify.com/artist/7LEIVUkXKIOds1qAwz9zf4?si=oWh1XMcPSquiOXLObAFFnA" title="Listen on Spotify"><ion-icon name="logo-spotify" style="color:#1DB954"></ion-icon></a>
+                    <a href="https://www.instagram.com/emcee_kb/?hl=en"><ion-icon name="logo-instagram" style="color:#E1306C"></ion-icon></a>
+                    <a href="https://www.youtube.com/channel/UCeS6u6EIabxSPjSpvMUyPwQ"><ion-icon name="logo-youtube" style="color:#FF0000"></ion-icon></a>
                 </div>
             </div>
         </div>  
     </main>
+    <script type="module">
+        import { redirectToLogin, initializeAuthUI } from './auth.js';
+        
+        // Check if user is logged in, redirect if not
+        redirectToLogin();
+        
+        // Initialize auth UI when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeAuthUI();
+        });
+    </script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js">
     </script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>

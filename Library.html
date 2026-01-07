@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spotify - Music On The Go</title>
+    <title>Emcee KB - Underground Hip-Hop Platform</title>
     <link href="Navbar.css" rel="stylesheet" />
     <link href="Library.css" rel="stylesheet" />
     <link href="Home.css" rel="stylesheet" />
@@ -15,7 +15,7 @@
             <li class="logo">
                 <a class="nav-link" href="./index.html">
                     <img src="./Resources/spotify.svg" />
-                    <span class="link-text" >Spotify</span>
+                    <span class="link-text" >Emcee KB</span>
                 </a>
             </li>
             <li class="nav-item">
@@ -44,11 +44,10 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">
-                    <img src="icons/icons-solid.svg" alt="Request Songs" />
-                    <span class="link-text">Request Songs</span>
+                    <span class="link-text" data-user-display style="color: #ececec; font-weight: bold;">User</span>
                 </a>
-            </li>                                                                                                                              
-        </ul>                                                                       
+            </li>
+        </ul>
     </nav>
     <main>
         <div contain>
@@ -346,6 +345,17 @@
             </div>
         </div>
     </main>
+    <script type="module">
+        import { redirectToLogin, initializeAuthUI } from './auth.js';
+        
+        // Check if user is logged in, redirect if not
+        redirectToLogin();
+        
+        // Initialize auth UI when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeAuthUI();
+        });
+    </script>
     <script src="Library.js"></script>
     <script src="https://kit.fontawesome.com/d5b2540b36.js" crossorigin="anonymous"></script>
 </body>

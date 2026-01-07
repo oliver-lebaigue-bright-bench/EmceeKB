@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emcee KB - Underground Hip-Hop Platform</title>
+    <link href="Login.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="main">
+        <label class="brand"><img src="./Resources/SpotiFlyer.svg" />Emcee KB</label>
+        <input type="checkbox" id="chk" aria-hidden="true"/>
+        <div class="singup">
+            <form id="signupForm">
+                <label for="chk" aria-hidden="true" >Sign up</label>
+                <input type="text" id="signupUsername" name="txt" placeholder="User name" required />
+                <input type="email" id="signupEmail" name="email" placeholder="Email" required />
+                <input type="password" id="signupPassword" name="pswd" placeholder="Password" required />
+                <button type="submit" class="button">Sign up</button>
+                <p id="signupError" style="color: red; text-align: center; font-size: 0.9em; margin-top: 10px;"></p>
+            </form>
+        </div>
+
+        <div class="login">
+            <form id="loginForm">
+                <label for="chk" aria-hidden="true" >Log in</label>
+                <input type="email" id="loginEmail" name="email" placeholder="Email" required />
+                <input type="password" id="loginPassword" name="pswd" placeholder="Password" required />
+                <button type="submit" class="button">Log in</button>
+                <p id="loginError" style="color: #573b8a; text-align: center; font-size: 0.9em; margin-top: 10px;"></p>
+            </form>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
+        import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-database.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCRcMLW2l1fYh7Uq2-gJRUdtR5VhPioHg8",
+            authDomain: "emcee-kb.firebaseapp.com",
+            databaseURL: "https://emcee-kb-default-rtdb.firebaseio.com",
+            projectId: "emcee-kb",
+            storageBucket: "emcee-kb.firebasestorage.app",
+            messagingSenderId: "30361254772",
+            appId: "1:30361254772:web:2eb68a791453349bff8a21",
+            measurementId: "G-NGGBFYGXEE"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+
+        // Sign up form handler
+        document.getElementById('signupForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('signupUsername').value.trim();
+            const email = document.getElementById('signupEmail').value.trim();
+            const password = document.getElementById('signupPassword').value;
+            const errorElement = document.getElementById('signupError');
+
+            errorElement.textContent = '';
+
+            try {
+                // Check if username already exists
+                const accountRef = ref(database, 'accounts/' + username);
+                const snapshot = await get(accountRef);
+
+                if (snapshot.exists()) {
+                    errorElement.textContent = 'Username already exists';
+                    return;
+                }
+
+                // Store new account
+                await set(accountRef, {
+                    email: email,
+                    password: password,
+                    createdAt: new Date().toISOString()
+                });
+
+                // Store current user in localStorage
+                localStorage.setItem('currentUser', username);
+                window.location.href = './index.html';
+            } catch (error) {
+                errorElement.textContent = 'Error creating account: ' + error.message;
+                console.error(error);
+            }
+        });
+
+        // Login form handler
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            const errorElement = document.getElementById('loginError');
+
+            errorElement.textContent = '';
+
+            try {
+                // Get all accounts and check for matching credentials
+                const accountsRef = ref(database, 'accounts');
+                const snapshot = await get(accountsRef);
+
+                if (!snapshot.exists()) {
+                    errorElement.textContent = 'No accounts found';
+                    return;
+                }
+
+                const accounts = snapshot.val();
+                let foundUser = null;
+
+                // Search for matching email and password
+                for (const [username, userData] of Object.entries(accounts)) {
+                    if (userData.email === email && userData.password === password) {
+                        foundUser = username;
+                        break;
+                    }
+                }
+
+                if (!foundUser) {
+                    errorElement.textContent = 'Invalid email or password';
+                    return;
+                }
+
+                // Store current user in localStorage
+                localStorage.setItem('currentUser', foundUser);
+                window.location.href = './index.html';
+            } catch (error) {
+                errorElement.textContent = 'Error logging in: ' + error.message;
+                console.error(error);
+            }
+        });
+    </script>
+</body>
+</html>
