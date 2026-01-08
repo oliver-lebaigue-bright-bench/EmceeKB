@@ -1,19 +1,194 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Emcee KB — Library (fixed)</title>
+    <link href="Library.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              emcee: {
+                DEFAULT: '#573b8a',
+                dark: '#3d2a5f',
+                accent: '#ffb703'
+              }
+            }
+          }
+        }
+      }
+    </script>
+  </head>
+
+  <body class="bg-emcee text-white antialiased">
+    <div class="min-h-screen flex">
+      <!-- Sidebar -->
+      <aside class="w-64 bg-emcee-dark p-6 flex flex-col gap-6">
+        <a href="./index.html" class="flex items-center gap-3">
+          <img src="./Resources/spotify.svg" alt="Emcee KB" class="w-8 h-8" />
+          <span class="text-lg font-bold">Emcee KB</span>
+        </a>
+
+        <nav class="flex-1">
+          <ul class="space-y-2">
+            <li><a href="./index.html" class="flex items-center gap-3 p-2 rounded hover:bg-white/5">Home</a></li>
+            <li><a href="./search.html" class="flex items-center gap-3 p-2 rounded hover:bg-white/5">Search</a></li>
+            <li><a href="./Library.html" class="flex items-center gap-3 p-2 rounded bg-white/5">Your Library</a></li>
+            <li><a href="./About.html" class="flex items-center gap-3 p-2 rounded hover:bg-white/5">About</a></li>
+          </ul>
+        </nav>
+
+        <div>
+          <button class="w-full py-2 px-3 rounded bg-emcee-accent text-black font-semibold">Premium</button>
+        </div>
+      </aside>
+
+      <!-- Main content -->
+      <main class="flex-1 p-8 overflow-auto">
+        <header class="flex items-center justify-between mb-8">
+          <div>
+            <h1 class="text-3xl font-extrabold text-emcee-accent">Browse</h1>
+            <p class="text-sm text-white/70">Discover tracks, albums and artists</p>
+          </div>
+          <div class="flex items-center gap-4">
+            <input placeholder="Search" class="bg-white/5 placeholder-white/60 rounded px-3 py-2 focus:outline-none" />
+            <div class="w-10 h-10 bg-white/5 rounded flex items-center justify-center">U</div>
+          </div>
+        </header>
+
+        <!-- Carousel section (mimics Spotify cards) -->
+        <section class="mb-8">
+          <h2 class="text-xl font-semibold mb-4">Trending songs</h2>
+          <div class="flex gap-4 overflow-x-auto pb-2">
+            <!-- card template repeated -->
+            <template id="cardTpl">
+              <div class="min-w-[180px] bg-white/5 rounded-lg p-3 flex-none">
+                <img src="covers/1.jpg" alt="cover" class="w-full h-40 object-cover rounded mb-3" />
+                <div class="text-sm font-semibold">Track title</div>
+                <div class="text-xs text-white/60">Artist</div>
+              </div>
+            </template>
+          </div>
+        </section>
+
+        <section class="mb-8">
+          <h2 class="text-xl font-semibold mb-4">Popular artists</h2>
+          <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            <div class="bg-white/5 rounded p-3 flex flex-col items-center gap-3">
+              <img src="covers/1.jpg" class="w-28 h-28 object-cover rounded-full" />
+              <div class="text-sm font-medium">Artist Name</div>
+            </div>
+            <div class="bg-white/5 rounded p-3 flex flex-col items-center gap-3">
+              <img src="covers/1.jpg" class="w-28 h-28 object-cover rounded-full" />
+              <div class="text-sm font-medium">Artist Name</div>
+            </div>
+            <div class="bg-white/5 rounded p-3 flex flex-col items-center gap-3">
+              <img src="covers/1.jpg" class="w-28 h-28 object-cover rounded-full" />
+              <div class="text-sm font-medium">Artist Name</div>
+            </div>
+            <div class="bg-white/5 rounded p-3 flex flex-col items-center gap-3">
+              <img src="covers/1.jpg" class="w-28 h-28 object-cover rounded-full" />
+              <div class="text-sm font-medium">Artist Name</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Albums / Singles grid -->
+        <section>
+          <h2 class="text-xl font-semibold mb-4">Popular albums & singles</h2>
+          <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            <div class="bg-white/5 rounded p-3">
+              <img src="covers/1.jpg" class="w-full h-32 object-cover rounded mb-2" />
+              <div class="text-sm font-medium">Album title</div>
+            </div>
+            <div class="bg-white/5 rounded p-3">
+              <img src="covers/1.jpg" class="w-full h-32 object-cover rounded mb-2" />
+              <div class="text-sm font-medium">Album title</div>
+            </div>
+            <div class="bg-white/5 rounded p-3">
+              <img src="covers/1.jpg" class="w-full h-32 object-cover rounded mb-2" />
+              <div class="text-sm font-medium">Album title</div>
+            </div>
+            <div class="bg-white/5 rounded p-3">
+              <img src="covers/1.jpg" class="w-full h-32 object-cover rounded mb-2" />
+              <div class="text-sm font-medium">Album title</div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- Bottom player -->
+    <div class="fixed left-64 right-0 bottom-0 bg-black/70 backdrop-blur-sm py-3 px-6 flex items-center gap-6">
+      <div class="flex items-center gap-4">
+        <img src="covers/1.jpg" class="w-12 h-12 object-cover rounded" />
+        <div>
+          <div class="text-sm font-medium">Track name</div>
+          <div class="text-xs text-white/60">Artist</div>
+        </div>
+      </div>
+
+      <div class="flex-1 flex items-center justify-center gap-6">
+        <button class="p-2 rounded hover:bg-white/5">&#9664;&#9664;</button>
+        <button class="p-3 rounded-full bg-white/10">&#9654;</button>
+        <button class="p-2 rounded hover:bg-white/5">&#9654;&#9654;</button>
+      </div>
+
+      <div class="w-48 flex items-center gap-3 justify-end">
+        <input type="range" class="w-full" />
+      </div>
+    </div>
+
+    <script>
+      // populate the trending cards dynamically (keeps markup small)
+      const tpl = document.getElementById('cardTpl');
+      const container = document.querySelector('section > div.flex');
+      for (let i = 0; i < 12; i++) {
+        const node = tpl.content.cloneNode(true);
+        node.querySelector('img').src = `covers/${(i % 8) + 1}.jpg`;
+        node.querySelector('.font-semibold').textContent = `Track ${(i+1)}`;
+        node.querySelector('.text-xs')?.remove?.();
+        container.appendChild(node);
+      }
+    </script>
+  </body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emcee KB - Underground Hip-Hop Platform</title>
-    <link href="Home.css" rel="stylesheet" />
+        <link href="Home.css" rel="stylesheet" />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            emcee: {
+                                DEFAULT: '#573b8a',
+                                dark: '#3d2a5f',
+                                accent: '#ffb703'
+                            }
+                        }
+                    }
+                }
+            }
+        </script>
     <link href="Navbar.css" media="screen and (min-width: 1100px)" rel="stylesheet" />
     <link rel="stylesheet" media="screen and (max-width: 1100px)" href="./responsive.css">
 
 </head>
 
-<body>
-    <nav class="navbar">
+<body class="bg-emcee text-white antialiased">
+    <nav class="navbar bg-emcee-dark">
         <ul class="navbar-nav">
             <li class="logo">
                 <a class="nav-link">
@@ -58,9 +233,9 @@
             </li>
         </ul>
     </nav>
-    <main>
-        <h1 class="margin">Emcee KB Tracks</h1>
-        <div class="container margin">
+    <main class="max-w-6xl mx-auto p-6">
+        <h1 class="margin text-3xl font-extrabold text-emcee-accent mb-6">Emcee KB Tracks</h1>
+        <div class="container margin max-w-5xl mx-auto">
             <div class="songlist">
                 <div class="songitem">
                     <img src="./covers/1.jpg" alt="1" />
@@ -441,14 +616,14 @@
         </div>
     </main>
     <script type="module">
-        import { redirectToLogin, initializeAuthUI } from './auth.js';
+        // import { redirectToLogin, initializeAuthUI } from './auth.js';
         
         // Check if user is logged in, redirect if not
-        redirectToLogin();
+        // redirectToLogin();
         
         // Initialize auth UI when page loads
         document.addEventListener('DOMContentLoaded', () => {
-            initializeAuthUI();
+            // initializeAuthUI();
         });
     </script>
     <script src="./script.js"></script>

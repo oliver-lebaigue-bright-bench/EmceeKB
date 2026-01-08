@@ -5,10 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emcee KB - Underground Hip-Hop Platform</title>
-    <link href="Login.css" rel="stylesheet" />
+        <link href="Login.css" rel="stylesheet" />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            emcee: {
+                                DEFAULT: '#573b8a',
+                                dark: '#3d2a5f',
+                                accent: '#ffb703'
+                            }
+                        }
+                    }
+                }
+            }
+        </script>
 </head>
-<body>
-    <div class="main">
+<body class="bg-emcee text-white antialiased">
+    <div class="main mx-auto max-w-md p-6 bg-white/5 rounded-lg shadow-lg">
         <label class="brand"><img src="./Resources/SpotiFlyer.svg" />Emcee KB</label>
         <input type="checkbox" id="chk" aria-hidden="true"/>
         <div class="singup">
@@ -63,26 +79,26 @@
 
             try {
                 // Check if username already exists
-                const accountRef = ref(database, 'accounts/' + username);
-                const snapshot = await get(accountRef);
+                // const accountRef = ref(database, 'accounts/' + username);
+                // const snapshot = await get(accountRef);
 
-                if (snapshot.exists()) {
-                    errorElement.textContent = 'Username already exists';
-                    return;
-                }
+                // if (snapshot.exists()) {
+                //     errorElement.textContent = 'Username already exists';
+                //     return;
+                // }
 
                 // Store new account
-                await set(accountRef, {
-                    email: email,
-                    password: password,
-                    createdAt: new Date().toISOString()
-                });
+                // await set(accountRef, {
+                //     email: email,
+                //     password: password,
+                //     createdAt: new Date().toISOString()
+                // });
 
                 // Store current user in localStorage
                 localStorage.setItem('currentUser', username);
                 window.location.href = './index.html';
             } catch (error) {
-                errorElement.textContent = 'Error creating account: ' + error.message;
+                // errorElement.textContent = 'Error creating account: ' + error.message;
                 console.error(error);
             }
         });
@@ -98,24 +114,24 @@
 
             try {
                 // Get all accounts and check for matching credentials
-                const accountsRef = ref(database, 'accounts');
-                const snapshot = await get(accountsRef);
+                // const accountsRef = ref(database, 'accounts');
+                // const snapshot = await get(accountsRef);
 
-                if (!snapshot.exists()) {
-                    errorElement.textContent = 'No accounts found';
-                    return;
-                }
+                // if (!snapshot.exists()) {
+                //     errorElement.textContent = 'No accounts found';
+                //     return;
+                // }
 
-                const accounts = snapshot.val();
+                // const accounts = snapshot.val();
                 let foundUser = null;
 
                 // Search for matching email and password
-                for (const [username, userData] of Object.entries(accounts)) {
-                    if (userData.email === email && userData.password === password) {
-                        foundUser = username;
-                        break;
-                    }
-                }
+                // for (const [username, userData] of Object.entries(accounts)) {
+                //     if (userData.email === email && userData.password === password) {
+                //         foundUser = username;
+                //         break;
+                //     }
+                // }
 
                 if (!foundUser) {
                     errorElement.textContent = 'Invalid email or password';

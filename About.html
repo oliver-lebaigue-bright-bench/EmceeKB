@@ -5,11 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emcee KB - Underground Hip-Hop Platform</title>
-    <link href="./Navbar.css" rel="stylesheet" />
+        <link href="About.css" rel="stylesheet" />
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            emcee: {
+                                DEFAULT: '#573b8a',
+                                dark: '#3d2a5f',
+                                accent: '#ffb703'
+                            }
+                        }
+                    }
+                }
+            }
+        </script>
     <link href="./About.css" rel="stylesheet" />
     <link href="Home.css" rel="stylesheet" />
 </head>
-<body>
+<body class="bg-emcee text-white antialiased">
     <nav class="navbar">
         <ul class="navbar-nav">
             <li class="logo">
@@ -49,13 +65,13 @@
             </li>
         </ul>
     </nav>
-    <main>
-        <div class="about-container">
+    <main class="max-w-4xl mx-auto p-6">
+        <div class="about-container max-w-3xl mx-auto">
             <div class="about-head">
-                <h1>ABOUT Emcee KB</h1>
+                <h1 class="text-3xl font-extrabold text-emcee-accent mb-4">ABOUT Emcee KB</h1>
                 <p>Emcee KB is a revolutionary underground hip-hop platform dedicated to amplifying the voices of independent rappers and emerging artists worldwide. We believe in the power of authentic hip-hop culture and provide a space where talented artists can share their music directly with a passionate community. Whether you're a seasoned underground rapper or discovering new talent, Emcee KB is your destination for fresh beats, raw lyrics, and unfiltered hip-hop artistry. Stream, discover, and support the next generation of hip-hop pioneers.</p>
                 <img src="./Resources/Spotify - Music On The Go.png" />
-                <h1>About Our Platform</h1>  
+                <h1 class="text-2xl font-bold text-emcee-accent mt-6">About Our Platform</h1>  
             </div>
             <div class="about-body">
                 <div class="about-me">
@@ -79,14 +95,14 @@
         </div>  
     </main>
     <script type="module">
-        import { redirectToLogin, initializeAuthUI } from './auth.js';
+        // import { redirectToLogin, initializeAuthUI } from './auth.js';
         
         // Check if user is logged in, redirect if not
-        redirectToLogin();
+        // redirectToLogin();
         
         // Initialize auth UI when page loads
         document.addEventListener('DOMContentLoaded', () => {
-            initializeAuthUI();
+            // initializeAuthUI();
         });
     </script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js">
