@@ -10,7 +10,7 @@ let masterSongName = document.getElementById('masterSongName');
 let songItems = Array.from(document.getElementsByClassName('songitem'));
 
 let songs = [
-    { songName: "AisayKaisay-Hasan Raheem", filePath: "songs/1.mp3", coverPath: "covers/Aisay Kaisay - Hasan Raheem.jpg" },
+    { songName: "AisayKaisay-Hasan Raheem", filePath: "songs/Blue Bonbers.mp3", coverPath: "covers/Aisay Kaisay - Hasan Raheem.jpg" },
     { songName: "Attention-Charlie Puth", filePath: "songs/2.mp3", coverPath: "covers/Attention - Charlie Puth.jpg" },
     { songName: "Bikhra-Abdul Hannan", filePath: "songs/3.mp3", coverPath: "covers/Bikhra - Abdul Hannan.jpg" },
     { songName: "Blinding Lights-TheWeeknd", filePath: "songs/4.mp3", coverPath: "covers/Blinding Lights - The Weeknd.jpg" },
