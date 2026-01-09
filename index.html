@@ -24,16 +24,26 @@
         }
     </script>
     <style>
-        /* Minimal custom CSS for scrollbar (not available in Tailwind) */
+        /* Glassmorphism custom scrollbar */
         body::-webkit-scrollbar {
-            width: 0.75rem;
+            width: 12px;
         }
         body::-webkit-scrollbar-track {
-            background: #1e1e24;
+            background: transparent;
         }
         body::-webkit-scrollbar-thumb {
-            background: #6649b8;
+            background: rgba(102, 73, 184, 0.6);
+            border-radius: 10px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
         }
+        body::-webkit-scrollbar-thumb:hover {
+            background: rgba(102, 73, 184, 0.9);
+            box-shadow: 0 8px 32px 0 rgba(255, 183, 3, 0.3);
+        }
+
+        /* Minimal custom CSS for scrollbar (not available in Tailwind) */
 
         .songitem {
             opacity: 0;
@@ -82,20 +92,20 @@
 
         @keyframes bg-spin {
             from {
-                transform: rotate(0deg) scale(1.15);
+                transform: rotate(0deg) scale(1.5);
             }
             to {
-                transform: rotate(360deg) scale(1.15);
+                transform: rotate(360deg) scale(1.5);
             }
         }
 
         .animate-bg-spin {
-            animation: bg-spin 20s linear infinite;
+            animation: bg-spin 25s linear infinite;
         }
     </style>
 </head>
 
-<body class="bg-emcee text-white antialiased font-sans min-h-screen overflow-hidden">
+<body class="bg-emcee text-white antialiased font-sans min-h-screen overflow-y-auto overflow-x-hidden">
     <div class="fixed inset-0 -z-10 overflow-hidden">
         <div
             class="absolute inset-[-50%] bg-cover bg-center animate-bg-spin blur-[0.8px]"
@@ -159,7 +169,7 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="max-w-6xl mx-auto p-6 lg:ml-20 mt-20 lg:mt-0">
+    <main class="max-w-6xl mx-auto p-6 lg:ml-20 mt-20 lg:mt-0 pb-32">
         <h1 class="text-4xl font-extrabold text-emcee-accent mb-8 text-center lg:text-left">Emcee KB Tracks</h1>
         <!-- Search Bar -->
         <div class="max-w-md mx-auto mb-8 lg:mx-0">
@@ -363,21 +373,6 @@
             });
         });
 
-        masterPlay.addEventListener('click', () => {
-            if (audioElement.paused || audioElement.currentTime <= 0) {
-                audioElement.play();
-                masterPlay.classList.remove('fa-play-circle');
-                masterPlay.classList.add('fa-pause-circle');
-                masterPlay.classList.add('pulse'); // Add pulse class
-                gif.style.opacity = 1;
-            } else {
-                audioElement.pause();
-                masterPlay.classList.remove('fa-pause-circle');
-                masterPlay.classList.add('fa-play-circle');
-                masterPlay.classList.remove('pulse'); // Remove pulse class
-                gif.style.opacity = 0;
-            }
-        });
     </script>
     <script src="./script.js"></script>
     <script src="https://kit.fontawesome.com/d5b2540b36.js" crossorigin="anonymous"></script>
