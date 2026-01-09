@@ -20,6 +20,10 @@ let songs = [
     { songName: "forever", filePath: "songs/forever.mp3", coverPath: "covers/8.jpg" },
     { songName: "lights on", filePath: "songs/lights on.mp3", coverPath: "covers/9.jpg" },
     { songName: "60 Minutes", filePath: "songs/60 Minutes.mp3", coverPath: "covers/10.jpg" },
+    { songName: "Suicide doors", filePath: "songs/Suicide doors.mp3", coverPath: "covers/11.jpg" },
+    { songName: "I lose", filePath: "songs/I lose.mp3", coverPath: "covers/12.jpg" },
+    { songName: "Lost Myself", filePath: "songs/Lost Myself.mp3", coverPath: "covers/13.jpg" },
+    { songName: "Minor Infractions", filePath: "songs/Minor Infractions.mp3", coverPath: "covers/14.jpg" },
 ]
 
 songItems.forEach((element, i) => {

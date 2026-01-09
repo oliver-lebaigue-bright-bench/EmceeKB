@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emcee KB - Underground Hip-Hop Platform</title>
+    <title>Emcee KB</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="icons/favicon.ico" type="image/x-icon"/>
     <script>
         tailwind.config = {
             theme: {
@@ -78,15 +79,45 @@
             0%, 100% { background-position: center; }
             50% { background-position: center 10px; }
         }
+
+        @keyframes bg-spin {
+            from {
+                transform: rotate(0deg) scale(1.15);
+            }
+            to {
+                transform: rotate(360deg) scale(1.15);
+            }
+        }
+
+        .animate-bg-spin {
+            animation: bg-spin 20s linear infinite;
+        }
     </style>
 </head>
 
-<body class="bg-emcee text-white antialiased font-sans min-h-screen bg-cover bg-center animate-float" style="background-image: url('./Resources/bg.jpg');">
+<body class="bg-emcee text-white antialiased font-sans min-h-screen overflow-hidden">
+    <div class="fixed inset-0 -z-10 overflow-hidden">
+        <div
+            class="absolute inset-[-50%] bg-cover bg-center animate-bg-spin blur-[0.8px]"
+            style="background-image: url('./Resources/bg.jpg');">
+        </div>
+    </div>
     <!-- Navbar -->
     <nav class="navbar group fixed top-0 left-0 h-20 lg:h-screen lg:w-20 w-full bg-emcee-dark transition-width duration-300 ease-in-out lg:hover:w-64 z-10 shadow-lg overflow-hidden">
         <ul class="navbar-nav flex flex-row lg:flex-col items-center justify-center lg:justify-start w-full h-full p-0 m-0 pt-8">
             <li class="logo flex items-center justify-center w-full lg:w-auto h-20 lg:h-auto bg-gray-800 lg:bg-transparent text-emcee-accent font-bold text-lg uppercase tracking-wider transition-all duration-600">
-                <img src="./Resources/spotify.svg" class="w-8 h-8 lg:mr-4 transition-transform duration-1000 group-hover:rotate-[360deg]" alt="Logo" />
+                <div class="relative w-12 h-12 lg:mr-4 group">
+                    <img
+                        src="./icons/favicon.ico"
+                        class="w-12 h-12 transition-transform duration-1000 group-hover:rotate-[360deg]"
+                        alt="Logo"
+                    />
+
+                    <!-- CD hole -->
+                    <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+                        <div class="w-1.5 h-1.5 bg-white rounded-full"></div>
+                    </div>
+                </div>
                 <span class="link-text text-white" id="logo-text"></span>
             </li>
             <li class="nav-item hidden lg:block w-full mt-10">
@@ -209,8 +240,35 @@
                         <i id="9" class="far fa-2x fa-play-circle songItemPlay text-emcee-accent hover:text-white transition-colors duration-200 cursor-pointer" aria-label="Play 60 Minutes"></i>
                     </span>
                 </div>
+                <div class="songitem flex flex-col items-center bg-emcee-dark rounded-lg p-4 shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer">
+                    <img src="./covers/11.jpg" class="w-32 h-32 rounded-md mb-2" alt="Suicide doors" />
+                    <span class="songName text-sm font-medium text-center">Suicide doors</span>
+                    <span class="songlistplay mt-2">
+                        <i id="10" class="far fa-2x fa-play-circle songItemPlay text-emcee-accent hover:text-white transition-colors duration-200 cursor-pointer" aria-label="Play Suicide doors"></i>
+                    </span>
+                </div>
+                <div class="songitem flex flex-col items-center bg-emcee-dark rounded-lg p-4 shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer">
+                    <img src="./covers/12.jpg" class="w-32 h-32 rounded-md mb-2" alt="I lose" />
+                    <span class="songName text-sm font-medium text-center">I lose</span>
+                    <span class="songlistplay mt-2">
+                        <i id="11" class="far fa-2x fa-play-circle songItemPlay text-emcee-accent hover:text-white transition-colors duration-200 cursor-pointer" aria-label="Play I lose"></i>
+                    </span>
+                </div>
+                <div class="songitem flex flex-col items-center bg-emcee-dark rounded-lg p-4 shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer">
+                    <img src="./covers/13.jpg" class="w-32 h-32 rounded-md mb-2" alt="Lost Myself" />
+                    <span class="songName text-sm font-medium text-center">Lost Myself</span>
+                    <span class="songlistplay mt-2">
+                        <i id="12" class="far fa-2x fa-play-circle songItemPlay text-emcee-accent hover:text-white transition-colors duration-200 cursor-pointer" aria-label="Play Lost Myself"></i>
+                    </span>
+                </div>
+                <div class="songitem flex flex-col items-center bg-emcee-dark rounded-lg p-4 shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer">
+                    <img src="./covers/14.jpg" class="w-32 h-32 rounded-md mb-2" alt="Minor Infractions" />
+                    <span class="songName text-sm font-medium text-center">Minor Infractions</span>
+                    <span class="songlistplay mt-2">
+                        <i id="13" class="far fa-2x fa-play-circle songItemPlay text-emcee-accent hover:text-white transition-colors duration-200 cursor-pointer" aria-label="Play Minor Infractions"></i>
+                    </span>
+                </div>
             </div>
-            <h2 class="text-2xl font-bold text-emcee-accent mt-12 text-center">Discover More Beats</h2>
         </div>
 
         <!-- Bottom Player -->
