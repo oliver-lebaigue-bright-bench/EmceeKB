@@ -6,146 +6,229 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emcee KB - Underground Hip-Hop Platform</title>
-        <link href="Home.css" rel="stylesheet" />
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script>
-            tailwind.config = {
-                theme: {
-                    extend: {
-                        colors: {
-                            emcee: {
-                                DEFAULT: '#573b8a',
-                                dark: '#3d2a5f',
-                                accent: '#ffb703'
-                            }
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        emcee: {
+                            DEFAULT: '#573b8a',
+                            dark: '#3d2a5f',
+                            accent: '#ffb703'
                         }
                     }
                 }
             }
-        </script>
-    <link href="Navbar.css" media="screen and (min-width: 1100px)" rel="stylesheet" />
-    <link rel="stylesheet" media="screen and (max-width: 1100px)" href="./responsive.css">
+        }
+    </script>
+    <style>
+        /* Minimal custom CSS for scrollbar (not available in Tailwind) */
+        body::-webkit-scrollbar {
+            width: 0.75rem;
+        }
+        body::-webkit-scrollbar-track {
+            background: #1e1e24;
+        }
+        body::-webkit-scrollbar-thumb {
+            background: #6649b8;
+        }
 
+        .songitem {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        .songitem:nth-child(1) { animation-delay: 0.1s; }
+        .songitem:nth-child(2) { animation-delay: 0.2s; }
+        .songitem:nth-child(3) { animation-delay: 0.3s; }
+        /* Add delays for all 10 items, incrementing by 0.1s */
+        .songitem:nth-child(10) { animation-delay: 1s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .pulse {
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .animate-slideUp {
+            animation: slideUp 0.8s ease-out forwards;
+        }
+        @keyframes slideUp {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        .animate-float {
+            animation: float 10s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { background-position: center; }
+            50% { background-position: center 10px; }
+        }
+    </style>
 </head>
 
-<body class="bg-emcee text-white antialiased">
-    <nav class="navbar bg-emcee-dark">
-        <ul class="navbar-nav">
-            <li class="logo">
-                <a class="nav-link">
-                    <img src="./Resources/spotify.svg" />
-                    <span class="link-text">Emcee KB</span>
+<body class="bg-emcee text-white antialiased font-sans min-h-screen bg-cover bg-center animate-float" style="background-image: url('./Resources/bg.jpg');">
+    <!-- Navbar -->
+    <nav class="navbar group fixed top-0 left-0 h-20 lg:h-screen lg:w-20 w-full bg-emcee-dark transition-width duration-300 ease-in-out lg:hover:w-64 z-10 shadow-lg overflow-hidden">
+        <ul class="navbar-nav flex flex-row lg:flex-col items-center justify-center lg:justify-start w-full h-full p-0 m-0 pt-8">
+            <li class="logo flex items-center justify-center w-full lg:w-auto h-20 lg:h-auto bg-gray-800 lg:bg-transparent text-emcee-accent font-bold text-lg uppercase tracking-wider transition-all duration-600">
+                <img src="./Resources/spotify.svg" class="w-8 h-8 lg:mr-4 transition-transform duration-1000 group-hover:rotate-[360deg]" alt="Logo" />
+                <span class="link-text text-white" id="logo-text"></span>
+            </li>
+            <li class="nav-item hidden lg:block w-full mt-10">
+                <a class="nav-link flex items-center h-20 px-2 text-gray-400 hover:text-white hover:bg-gray-700 transition-all duration-500 group" href="./index.html" aria-label="Home">
+                    <img src="icons/home.svg" class="w-8 h-8 filter grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100" alt="Home" />
+                    <span class="link-text ml-4" id="home-text"></span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="./index.html">
-                    <img src="icons/home.svg" alt="Home" />
-                    <span class="link-text">Home</span>
+            <li class="nav-item hidden lg:block w-full">
+                <a class="nav-link flex items-center h-20 px-2 text-gray-400 hover:text-white hover:bg-gray-700 transition-all duration-500 group" href="#" aria-label="User">
+                    <span class="link-text text-gray-200 font-bold" id="user-text" data-user-display></span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <span class="link-text" data-user-display style="color: #ececec; font-weight: bold;">User</span>
+            <li class="nav-item hidden lg:block w-full">
+                <a class="nav-link flex items-center h-20 px-2 text-gray-400 hover:text-white hover:bg-gray-700 transition-all duration-500 group" href="./About.html" aria-label="About Us">
+                    <img src="icons/about.svg" class="w-8 h-8 filter grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100" alt="About Us" />
+                    <span class="link-text ml-4" id="about-text"></span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="./About.html">
-                    <img src="icons/about.svg" alt="About us" />
-                    <span class="link-text">About us</span>
+            <li class="nav-item hidden lg:block w-full">
+                <a class="nav-link flex items-center h-20 px-2 text-gray-400 hover:text-white hover:bg-gray-700 transition-all duration-500 group" href="./Library.html" aria-label="Library">
+                    <img src="icons/library.svg" class="w-8 h-8 filter grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100" alt="Library" />
+                    <span class="link-text ml-4" id="library-text"></span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="./Library.html">
-                    <img src="icons/library.svg" alt="Library" />
-                    <span class="link-text">Library</span>
+            <li class="nav-item hidden lg:block w-full">
+                <a class="nav-link flex items-center h-20 px-2 text-gray-400 hover:text-white hover:bg-gray-700 transition-all duration-500 group" href="#" aria-label="Rating & Review">
+                    <img src="icons/like.svg" class="w-8 h-8 filter grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100" alt="Rating & Review" />
+                    <span class="link-text ml-4" id="rating-text"></span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <img src="icons/like.svg" alt="Rating & Review" />
-                    <span class="link-text">Rating & Review</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <img src="icons/icons-solid.svg" alt="Request Songs" />
-                    <span class="link-text">Request Songs</span>
+            <li class="nav-item hidden lg:block w-full">
+                <a class="nav-link flex items-center h-20 px-2 text-gray-400 hover:text-white hover:bg-gray-700 transition-all duration-500 group" href="#" aria-label="Request Songs">
+                    <img src="icons/icons-solid.svg" class="w-8 h-8 filter grayscale opacity-70 group-hover:grayscale-0 group-hover:opacity-100" alt="Request Songs" />
+                    <span class="link-text ml-4" id="request-text"></span>
                 </a>
             </li>
         </ul>
     </nav>
-    <main class="max-w-6xl mx-auto p-6">
-        <h1 class="margin text-3xl font-extrabold text-emcee-accent mb-6">Emcee KB Tracks</h1>
-        <div class="container margin max-w-5xl mx-auto">
-            <div class="songlist">
-                <div class="songitem">
-                    <img src="./covers/1.jpg" alt="1" />
-                    <span class="songName">Blue Bombers</span>
-                    <span class="songlistplay"><i id="0" class="far songItemPlay fa-play-circle"></i></span>
-                </div>
-                <div class="songitem">
-                    <img src="./covers/1.jpg" alt="2" />
-                    <span class="songName">Doing Better</span>
-                    <span class="songlistplay"><i id="1" class="far songItemPlay fa-play-circle"></i></span>
-                </div>
-                <div class="songitem">
-                    <img src="./covers/1.jpg" alt="3" />
-                    <span class="songName">Great Escape</span>
-                    <span class="songlistplay"><i id="2" class="far songItemPlay fa-play-circle"></i></span>
-                </div>
-                <div class="songitem">
-                    <img src="./covers/1.jpg" alt="4" />
-                    <span class="songName">Night Sweats</span>
-                    <span class="songlistplay"><i id="3" class="far songItemPlay fa-play-circle"></i></span>
-                </div>
-                <div class="songitem">
-                    <img src="./covers/1.jpg" alt="5" />
-                    <span class="songName">Proud</span>
-                    <span class="songlistplay"><i id="4" class="far songItemPlay fa-play-circle"></i></span>
-                </div>
-                <div class="songitem">
-                    <img src="./covers/1.jpg" alt="6" />
-                    <span class="songName">Slow Song Freestyle</span>
-                    <span class="songlistplay"><i id="5" class="far songItemPlay fa-play-circle"></i></span>
-                </div>
-                <div class="songitem">
-                    <img src="./covers/1.jpg" alt="7" />
-                    <span class="songName">Wake Me Up</span>
-                    <span class="songlistplay"><i id="6" class="far songItemPlay fa-play-circle"></i></span>
-                </div>
-                <div class="songitem">
-                    <img src="./covers/1.jpg" alt="8" />
-                    <span class="songName">forever</span>
-                    <span class="songlistplay"><i id="7" class="far songItemPlay fa-play-circle"></i></span>
-                </div>
-                <div class="songitem">
-                    <img src="./covers/1.jpg" alt="9" />
-                    <span class="songName">lights on</span>
-                    <span class="songlistplay"><i id="8" class="far songItemPlay fa-play-circle"></i></span>
-                </div>
-                <div class="songitem">
-                    <img src="./covers/1.jpg" alt="10" />
-                    <span class="songName">60 Minutes</span>
-                    <span class="songlistplay"><i id="9" class="far songItemPlay fa-play-circle"></i></span>
-                </div>
-                <h1 class="head">Discover More Beats</h1>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto p-6 lg:ml-20 mt-20 lg:mt-0">
+        <h1 class="text-4xl font-extrabold text-emcee-accent mb-8 text-center lg:text-left">Emcee KB Tracks</h1>
+        <!-- Search Bar -->
+        <div class="max-w-md mx-auto mb-8 lg:mx-0">
+            <div class="relative">
+                <input type="text" id="searchInput" placeholder="Search tracks..." class="w-full pl-10 pr-4 py-2 bg-emcee-dark text-white rounded-lg border border-emcee-accent focus:outline-none focus:ring-2 focus:ring-emcee-accent placeholder-gray-400" />
+                <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-emcee-accent"></i>
             </div>
         </div>
-        <div class="bottom margin">
-            <input type="range" name="range" id="ProgressBar" min="0" max="100" />
-            <div class="songinfo-container">
-                <div class="songinfo">
-                    <img src="./Resources/playing.gif" width="45px" alt="" id="gif" />
-                    <span id="masterSongName"> Emcee KB - Underground Rapper</span>
+        <div class="container max-w-5xl mx-auto">
+            <div class="songlist grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                <div class="songitem flex flex-col items-center bg-emcee-dark rounded-lg p-4 shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer">
+                    <img src="./covers/1.jpg" class="w-32 h-32 rounded-md mb-2" alt="Blue Bombers" />
+                    <span class="songName text-sm font-medium text-center">Blue Bombers</span>
+                    <span class="songlistplay mt-2">
+                        <i id="0" class="far fa-2x fa-play-circle songItemPlay text-emcee-accent hover:text-white transition-colors duration-200 cursor-pointer" aria-label="Play Blue Bombers"></i>
+                    </span>
                 </div>
-                <div class="icon">
-                    <i class="fas fa-2x fa-step-backward" id="previous"></i>
-                    <i class="far fa-2x fa-play-circle" id="masterPlay"></i>
-                    <i class="fas fa-2x fa-step-forward" id="next"></i>
+                <div class="songitem flex flex-col items-center bg-emcee-dark rounded-lg p-4 shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer">
+                    <img src="./covers/2.jpg" class="w-32 h-32 rounded-md mb-2" alt="Doing Better" />
+                    <span class="songName text-sm font-medium text-center">Doing Better</span>
+                    <span class="songlistplay mt-2">
+                        <i id="1" class="far fa-2x fa-play-circle songItemPlay text-emcee-accent hover:text-white transition-colors duration-200 cursor-pointer" aria-label="Play Doing Better"></i>
+                    </span>
+                </div>
+                <div class="songitem flex flex-col items-center bg-emcee-dark rounded-lg p-4 shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer">
+                    <img src="./covers/3.jpg" class="w-32 h-32 rounded-md mb-2" alt="Great Escape" />
+                    <span class="songName text-sm font-medium text-center">Great Escape</span>
+                    <span class="songlistplay mt-2">
+                        <i id="2" class="far fa-2x fa-play-circle songItemPlay text-emcee-accent hover:text-white transition-colors duration-200 cursor-pointer" aria-label="Play Great Escape"></i>
+                    </span>
+                </div>
+                <div class="songitem flex flex-col items-center bg-emcee-dark rounded-lg p-4 shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer">
+                    <img src="./covers/4.jpg" class="w-32 h-32 rounded-md mb-2" alt="Night Sweats" />
+                    <span class="songName text-sm font-medium text-center">Night Sweats</span>
+                    <span class="songlistplay mt-2">
+                        <i id="3" class="far fa-2x fa-play-circle songItemPlay text-emcee-accent hover:text-white transition-colors duration-200 cursor-pointer" aria-label="Play Night Sweats"></i>
+                    </span>
+                </div>
+                <div class="songitem flex flex-col items-center bg-emcee-dark rounded-lg p-4 shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer">
+                    <img src="./covers/5.jpg" class="w-32 h-32 rounded-md mb-2" alt="Proud" />
+                    <span class="songName text-sm font-medium text-center">Proud</span>
+                    <span class="songlistplay mt-2">
+                        <i id="4" class="far fa-2x fa-play-circle songItemPlay text-emcee-accent hover:text-white transition-colors duration-200 cursor-pointer" aria-label="Play Proud"></i>
+                    </span>
+                </div>
+                <div class="songitem flex flex-col items-center bg-emcee-dark rounded-lg p-4 shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer">
+                    <img src="./covers/6.jpg" class="w-32 h-32 rounded-md mb-2" alt="Slow Song Freestyle" />
+                    <span class="songName text-sm font-medium text-center">Slow Song Freestyle</span>
+                    <span class="songlistplay mt-2">
+                        <i id="5" class="far fa-2x fa-play-circle songItemPlay text-emcee-accent hover:text-white transition-colors duration-200 cursor-pointer" aria-label="Play Slow Song Freestyle"></i>
+                    </span>
+                </div>
+                <div class="songitem flex flex-col items-center bg-emcee-dark rounded-lg p-4 shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer">
+                    <img src="./covers/7.jpg" class="w-32 h-32 rounded-md mb-2" alt="Wake Me Up" />
+                    <span class="songName text-sm font-medium text-center">Wake Me Up</span>
+                    <span class="songlistplay mt-2">
+                        <i id="6" class="far fa-2x fa-play-circle songItemPlay text-emcee-accent hover:text-white transition-colors duration-200 cursor-pointer" aria-label="Play Wake Me Up"></i>
+                    </span>
+                </div>
+                <div class="songitem flex flex-col items-center bg-emcee-dark rounded-lg p-4 shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer">
+                    <img src="./covers/8.jpg" class="w-32 h-32 rounded-md mb-2" alt="forever" />
+                    <span class="songName text-sm font-medium text-center">forever</span>
+                    <span class="songlistplay mt-2">
+                        <i id="7" class="far fa-2x fa-play-circle songItemPlay text-emcee-accent hover:text-white transition-colors duration-200 cursor-pointer" aria-label="Play forever"></i>
+                    </span>
+                </div>
+                <div class="songitem flex flex-col items-center bg-emcee-dark rounded-lg p-4 shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer">
+                    <img src="./covers/9.jpg" class="w-32 h-32 rounded-md mb-2" alt="lights on" />
+                    <span class="songName text-sm font-medium text-center">lights on</span>
+                    <span class="songlistplay mt-2">
+                        <i id="8" class="far fa-2x fa-play-circle songItemPlay text-emcee-accent hover:text-white transition-colors duration-200 cursor-pointer" aria-label="Play lights on"></i>
+                    </span>
+                </div>
+                <div class="songitem flex flex-col items-center bg-emcee-dark rounded-lg p-4 shadow-md hover:shadow-xl transition-shadow duration-300 cursor-pointer">
+                    <img src="./covers/10.jpg" class="w-32 h-32 rounded-md mb-2" alt="60 Minutes" />
+                    <span class="songName text-sm font-medium text-center">60 Minutes</span>
+                    <span class="songlistplay mt-2">
+                        <i id="9" class="far fa-2x fa-play-circle songItemPlay text-emcee-accent hover:text-white transition-colors duration-200 cursor-pointer" aria-label="Play 60 Minutes"></i>
+                    </span>
+                </div>
+            </div>
+            <h2 class="text-2xl font-bold text-emcee-accent mt-12 text-center">Discover More Beats</h2>
+        </div>
+
+        <!-- Bottom Player -->
+        <div class="bottom fixed bottom-0 left-0 w-full bg-emcee-dark bg-opacity-90 backdrop-blur-md rounded-t-lg p-4 shadow-2xl flex flex-col items-center justify-center transform translate-y-full animate-slideUp">            <input type="range" name="range" id="ProgressBar" min="0" max="100" class="w-4/5 mb-4 slider" />
+            <div class="songinfo-container flex flex-col lg:flex-row items-center justify-between w-full max-w-4xl">
+                <div class="songinfo flex items-center mb-4 lg:mb-0">
+                    <img src="./Resources/playing.gif" class="w-12 h-12 opacity-0 transition-opacity duration-1000" id="gif" alt="Playing" />
+                    <span id="masterSongName" class="ml-4 text-lg font-medium">Emcee KB - Underground Rapper</span>
+                </div>
+                <div class="icon flex items-center space-x-6">
+                    <i class="fas fa-2x fa-step-backward text-emcee-accent hover:text-white transition-colors duration-200 cursor-pointer" id="previous" aria-label="Previous"></i>
+                    <i class="far fa-2x fa-play-circle text-emcee-accent hover:text-white transition-colors duration-200 cursor-pointer" id="masterPlay" aria-label="Play/Pause"></i>
+                    <i class="fas fa-2x fa-step-forward text-emcee-accent hover:text-white transition-colors duration-200 cursor-pointer" id="next" aria-label="Next"></i>
                 </div>
             </div>
         </div>
     </main>
+
     <script type="module">
         // import { redirectToLogin, initializeAuthUI } from './auth.js';
         
@@ -155,6 +238,87 @@
         // Initialize auth UI when page loads
         document.addEventListener('DOMContentLoaded', () => {
             // initializeAuthUI();
+        });
+    </script>
+    <script>
+        // Typing effect for sidebar text
+        const texts = {
+            'logo-text': 'Emcee KB',
+            'home-text': 'Home',
+            'user-text': 'User',
+            'about-text': 'About Us',
+            'library-text': 'Library',
+            'rating-text': 'Rating & Review',
+            'request-text': 'Request Songs'
+        };
+
+        const navbar = document.querySelector('.navbar');
+        let intervals = {};
+
+        function typeText(elementId, text, speed = 100) {
+            const element = document.getElementById(elementId);
+            element.textContent = '';
+            let i = 0;
+            intervals[elementId] = setInterval(() => {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(intervals[elementId]);
+                }
+            }, speed);
+        }
+
+        function clearText(elementId) {
+            const element = document.getElementById(elementId);
+            element.textContent = '';
+            if (intervals[elementId]) {
+                clearInterval(intervals[elementId]);
+            }
+        }
+
+        navbar.addEventListener('mouseenter', () => {
+            Object.keys(texts).forEach(id => {
+                typeText(id, texts[id]);
+            });
+        });
+
+        navbar.addEventListener('mouseleave', () => {
+            Object.keys(texts).forEach(id => {
+                clearText(id);
+            });
+        });
+
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        const songItems = Array.from(document.getElementsByClassName('songitem'));
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            songItems.forEach((item) => {
+                const songName = item.querySelector('.songName').textContent.toLowerCase();
+                if (songName.includes(query)) {
+                    item.style.display = 'flex'; // Show matching items
+                } else {
+                    item.style.display = 'none'; // Hide non-matching items
+                }
+            });
+        });
+
+        masterPlay.addEventListener('click', () => {
+            if (audioElement.paused || audioElement.currentTime <= 0) {
+                audioElement.play();
+                masterPlay.classList.remove('fa-play-circle');
+                masterPlay.classList.add('fa-pause-circle');
+                masterPlay.classList.add('pulse'); // Add pulse class
+                gif.style.opacity = 1;
+            } else {
+                audioElement.pause();
+                masterPlay.classList.remove('fa-pause-circle');
+                masterPlay.classList.add('fa-play-circle');
+                masterPlay.classList.remove('pulse'); // Remove pulse class
+                gif.style.opacity = 0;
+            }
         });
     </script>
     <script src="./script.js"></script>
