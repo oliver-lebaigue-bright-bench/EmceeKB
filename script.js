@@ -64,9 +64,10 @@ const makeAllPlays = () => {
 Array.from(document.getElementsByClassName('songItemPlay')).forEach((element) => {
     element.addEventListener('click', (e) => {
         makeAllPlays();
-        songIndex = parseInt(e.target.id);
-        e.target.classList.remove('fa-play-circle');
-        e.target.classList.add('fa-pause-circle');
+        // Use currentTarget so clicks on inner SVGs or children still reference the icon element
+        songIndex = parseInt(e.currentTarget.id);
+        e.currentTarget.classList.remove('fa-play-circle');
+        e.currentTarget.classList.add('fa-pause-circle');
         audioElement.src = songs[songIndex].filePath;
         masterSongName.innerText = songs[songIndex].songName;
         audioElement.currentTime = 0;
