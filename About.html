@@ -1,112 +1,259 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emcee KB - Underground Hip-Hop Platform</title>
-        <link href="About.css" rel="stylesheet" />
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script>
-            tailwind.config = {
-                theme: {
-                    extend: {
-                        colors: {
-                            emcee: {
-                                DEFAULT: '#573b8a',
-                                dark: '#3d2a5f',
-                                accent: '#ffb703'
-                            }
+    <title>About Emcee KB</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="icons/favicon.ico" type="image/x-icon"/>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        emcee: {
+                            DEFAULT: '#573b8a',
+                            dark: '#3d2a5f',
+                            accent: '#ffb703'
                         }
                     }
                 }
             }
-        </script>
-    <link href="./About.css" rel="stylesheet" />
-    <link href="Home.css" rel="stylesheet" />
+        }
+    </script>
+
+    <style>
+        body::-webkit-scrollbar { width: 12px; }
+        body::-webkit-scrollbar-thumb {
+            background: rgba(102, 73, 184, 0.6);
+            border-radius: 10px;
+        }
+
+        @keyframes bg-spin {
+            from { transform: rotate(0deg) scale(1.5); }
+            to { transform: rotate(360deg) scale(1.5); }
+        }
+        .animate-bg-spin {
+            animation: bg-spin 25s linear infinite;
+        }
+
+        .spotify-logo {
+            filter: invert(1) hue-rotate(120deg) saturate(2);
+        }
+
+        .social-card {
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeSlideIn 0.6s ease forwards;
+        }
+        .social-card:nth-child(1) { animation-delay: 0.1s; }
+        .social-card:nth-child(2) { animation-delay: 0.2s; }
+        .social-card:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes fadeSlideIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
-<body class="bg-emcee text-white antialiased">
-    <nav class="navbar">
-        <ul class="navbar-nav">
-            <li class="logo">
-                <a class="nav-link" href="./index.html">
-                    <img src="./Resources/spotify.svg" />
-                    <span class="link-text" >Emcee KB</span>
+
+<body class="bg-emcee text-white antialiased font-sans min-h-screen overflow-y-auto overflow-x-hidden">
+
+    <!-- Background -->
+    <div class="fixed inset-0 -z-10 overflow-hidden">
+        <div class="absolute inset-[-50%] bg-cover bg-center blur-[0.8px] animate-bg-spin"
+             style="background-image: url('./Resources/bg.jpg');"></div>
+    </div>
+
+    <!-- NAVBAR (same as index.html) -->
+    <nav class="navbar group fixed top-0 left-0 h-20 lg:h-screen lg:w-20 w-full bg-emcee-dark transition-width duration-300 ease-in-out lg:hover:w-64 z-10 shadow-lg overflow-hidden">
+        <ul class="navbar-nav flex flex-row lg:flex-col items-center justify-center lg:justify-start w-full h-full pt-8">
+
+            <li class="logo flex items-center justify-center w-full h-20 bg-gray-800 lg:bg-transparent text-emcee-accent font-bold uppercase">
+                <div class="relative w-12 h-12 lg:mr-4 group">
+                    <img src="./icons/favicon.ico"
+                         class="w-12 h-12 transition-transform duration-1000 group-hover:rotate-[360deg]"
+                         alt="Logo">
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="w-1.5 h-1.5 bg-white rounded-full"></div>
+                    </div>
+                </div>
+                <span id="logo-text"></span>
+            </li>
+
+            <li class="hidden lg:block w-full mt-10">
+                <a href="./index.html" class="flex items-center h-20 px-2 text-gray-400 hover:text-white hover:bg-gray-700 transition-all group">
+                    <img src="icons/home.svg" class="w-8 h-8 opacity-70 group-hover:opacity-100">
+                    <span id="home-text" class="ml-4"></span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="./index.html">
-                    <img src="icons/home.svg" alt="Home" />
-                    <span class="link-text">Home</span>
+
+            <li class="hidden lg:block w-full">
+                <a href="#" class="flex items-center h-20 px-2 text-gray-400 hover:text-white hover:bg-gray-700 transition-all group">
+                    <span id="user-text" class="ml-4 font-bold"></span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="./About.html">
-                    <img src="icons/about.svg" alt="About us" />
-                    <span class="link-text">About us</span>
+
+            <li class="hidden lg:block w-full">
+                <a href="./About.html" class="flex items-center h-20 px-2 text-white bg-gray-700 transition-all group">
+                    <img src="icons/about.svg" class="w-8 h-8">
+                    <span id="about-text" class="ml-4"></span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="./Library.html">
-                    <img src="icons/library.svg" alt="Library" />
-                    <span class="link-text">Library</span>
+
+            <li class="hidden lg:block w-full">
+                <a href="./Library.html" class="flex items-center h-20 px-2 text-gray-400 hover:text-white hover:bg-gray-700 transition-all group">
+                    <img src="icons/library.svg" class="w-8 h-8 opacity-70 group-hover:opacity-100">
+                    <span id="library-text" class="ml-4"></span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <img src="icons/like.svg" alt="Rating & Review" />
-                    <span class="link-text">Rating & Review</span>
+
+            <li class="hidden lg:block w-full">
+                <a href="#" class="flex items-center h-20 px-2 text-gray-400 hover:text-white hover:bg-gray-700 transition-all group">
+                    <img src="icons/like.svg" class="w-8 h-8 opacity-70 group-hover:opacity-100">
+                    <span id="rating-text" class="ml-4"></span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <span class="link-text" data-user-display style="color: #ececec; font-weight: bold;">User</span>
+
+            <li class="hidden lg:block w-full">
+                <a href="#" class="flex items-center h-20 px-2 text-gray-400 hover:text-white hover:bg-gray-700 transition-all group">
+                    <img src="icons/icons-solid.svg" class="w-8 h-8 opacity-70 group-hover:opacity-100">
+                    <span id="request-text" class="ml-4"></span>
                 </a>
             </li>
         </ul>
     </nav>
-    <main class="max-w-4xl mx-auto p-6">
-        <div class="about-container max-w-3xl mx-auto">
-            <div class="about-head">
-                <h1 class="text-3xl font-extrabold text-emcee-accent mb-4">ABOUT Emcee KB</h1>
-                <p>Emcee KB is a revolutionary underground hip-hop platform dedicated to amplifying the voices of independent rappers and emerging artists worldwide. We believe in the power of authentic hip-hop culture and provide a space where talented artists can share their music directly with a passionate community. Whether you're a seasoned underground rapper or discovering new talent, Emcee KB is your destination for fresh beats, raw lyrics, and unfiltered hip-hop artistry. Stream, discover, and support the next generation of hip-hop pioneers.</p>
-                <img src="./Resources/Spotify - Music On The Go.png" />
-                <h1 class="text-2xl font-bold text-emcee-accent mt-6">About Our Platform</h1>  
+
+    <!-- Main Content -->
+    <!-- Background -->
+    <div class="fixed inset-0 -z-10 overflow-hidden">
+        <div class="absolute inset-[-50%] bg-cover bg-center blur-[0.8px] animate-bg-spin"
+             style="background-image: url('./Resources/bg.jpg');"></div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-6xl mx-auto p-6 lg:ml-20 mt-20 pb-32">
+        <h1 class="text-4xl font-extrabold text-emcee-accent mb-8 text-center lg:text-left">
+            About Emcee KB
+        </h1>
+
+        <div class="bg-emcee-dark rounded-lg p-6 shadow-md max-w-5xl mx-auto">
+
+            <!-- ABOUT TEXT (unchanged) -->
+            <p class="text-lg mb-6">
+                Emcee KB is a rising underground rapper known for his raw, introspective lyrics and gritty beats...
+            </p>
+
+            <img src="./icons/emcee-upscaled.png"
+                 class="w-full max-w-md mx-auto mb-8 rounded-lg"
+                 alt="Emcee KB" />
+
+            <hr class="my-8 border-white/10">
+
+            <!-- LISTEN & FOLLOW -->
+            <h2 class="text-2xl font-bold text-emcee-accent mb-6">
+                Listen & Follow Emcee KB
+            </h2>
+
+            <!-- SOCIAL CARDS -->
+            <div class="social flex flex-col gap-4 text-lg">
+
+                <a href="https://open.spotify.com/artist/7LEIVUkXKIOds1qAwz9zf4"
+                   aria-label="Listen on Spotify"
+                   class="social-card flex items-center gap-4 p-4 rounded-lg
+                          bg-white/5 hover:bg-white/10
+                          text-green-400 hover:text-green-300
+                          transition-all hover:shadow-[0_0_20px_rgba(30,215,96,0.4)]">
+                    <img src="./Resources/spotify.svg"
+                         class="w-8 h-8 spotify-logo"
+                         alt="Spotify Logo" />
+                    <span class="font-medium">Spotify</span>
+                </a>
+
+                <a href="https://discord.gg/F3ZXWNk6X"
+                   aria-label="Join Emcee KB Discord"
+                   class="social-card flex items-center gap-4 p-4 rounded-lg
+                          bg-white/5 hover:bg-white/10
+                          text-blue-400 hover:text-blue-300
+                          transition-all hover:shadow-[0_0_20px_rgba(88,101,242,0.4)]">
+
+                    <ion-icon name="logo-discord" class="text-3xl align-middle"></ion-icon>
+                    <span class="font-medium">Join Discord</span>
+                </a>
+
+                <a href="https://www.instagram.com/emcee_kb/"
+                   aria-label="Follow Emcee KB on Instagram"
+                   class="social-card flex items-center gap-4 p-4 rounded-lg
+                          bg-white/5 hover:bg-white/10
+                          text-pink-400 hover:text-pink-300
+                          transition-all hover:shadow-[0_0_20px_rgba(236,72,153,0.4)]">
+
+                    <ion-icon name="logo-instagram" class="text-3xl align-middle"></ion-icon>
+                    <span class="font-medium">Instagram</span>
+                </a>
+
+                <a href="https://www.youtube.com/channel/UCeS6u6EIabxSPjSpvMUyPwQ"
+                   aria-label="Subscribe to Emcee KB on YouTube"
+                   class="social-card flex items-center gap-4 p-4 rounded-lg
+                          bg-white/5 hover:bg-white/10
+                          text-red-400 hover:text-red-300
+                          transition-all hover:shadow-[0_0_20px_rgba(239,68,68,0.4)]">
+
+                    <ion-icon name="logo-youtube" class="text-3xl align-middle"></ion-icon>
+                    <span class="font-medium">YouTube</span>
+                </a>
+
             </div>
-            <div class="about-body">
-                <div class="about-me">
-                    <p>🎤 Emcee KB Community</p>
-                    <p>Join our thriving community of hip-hop enthusiasts and artists:</p>
-                    <p>- Discover emerging and independent rappers</p>
-                    <p>- Connect with hip-hop artists from around the world</p>
-                    <p>- Share your own beats and tracks</p>
-                    <p>- Support underground hip-hop culture</p>
-                </div>
-            </div>
-            <h1>Follow us on!</h1>
-            <div class="contact">
-                <div class="social">
-                    <a href="https://discord.gg/F3ZXWNk6X" title="Join our Discord"><ion-icon name="logo-discord" style="color:#5865F2"></ion-icon></a>
-                    <a href="https://open.spotify.com/artist/7LEIVUkXKIOds1qAwz9zf4?si=oWh1XMcPSquiOXLObAFFnA" title="Listen on Spotify"><ion-icon name="logo-spotify" style="color:#1DB954"></ion-icon></a>
-                    <a href="https://www.instagram.com/emcee_kb/?hl=en"><ion-icon name="logo-instagram" style="color:#E1306C"></ion-icon></a>
-                    <a href="https://www.youtube.com/channel/UCeS6u6EIabxSPjSpvMUyPwQ"><ion-icon name="logo-youtube" style="color:#FF0000"></ion-icon></a>
-                </div>
-            </div>
-        </div>  
+        </div>
     </main>
-    <script type="module">
-        // import { redirectToLogin, initializeAuthUI } from './auth.js';
-        
-        // Check if user is logged in, redirect if not
-        // redirectToLogin();
-        
-        // Initialize auth UI when page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            // initializeAuthUI();
+
+    <!-- Typing Effect Script -->
+    <script>
+        const texts = {
+            'logo-text': 'Emcee KB',
+            'home-text': 'Home',
+            'user-text': 'User',
+            'about-text': 'About Us',
+            'library-text': 'Library',
+            'rating-text': 'Rating & Review',
+            'request-text': 'Request Songs'
+        };
+
+        const navbar = document.querySelector('.navbar');
+        let intervals = {};
+
+        function typeText(id, text) {
+            const el = document.getElementById(id);
+            el.textContent = '';
+            let i = 0;
+            intervals[id] = setInterval(() => {
+                if (i < text.length) {
+                    el.textContent += text[i++];
+                } else clearInterval(intervals[id]);
+            }, 80);
+        }
+
+        function clearText(id) {
+            document.getElementById(id).textContent = '';
+            clearInterval(intervals[id]);
+        }
+
+        navbar.addEventListener('mouseenter', () => {
+            Object.keys(texts).forEach(id => typeText(id, texts[id]));
+        });
+
+        navbar.addEventListener('mouseleave', () => {
+            Object.keys(texts).forEach(clearText);
         });
     </script>
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js">
-    </script>
+
+    <!-- Icons -->
+    <script src="https://kit.fontawesome.com/d5b2540b36.js" crossorigin="anonymous"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
 </body>
 </html>
